@@ -1,15 +1,11 @@
----
-permalink: /fossil
-root: ./projects/fossil/
----
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="{{page.root}}/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <title>Fossil</title>
-    
+
     <style>
       * {
         margin: 0;
@@ -44,15 +40,48 @@ root: ./projects/fossil/
       button {
         width: 40px;
         height: 40px;
-        position: absolute;
-        bottom: 10px;
-        left: 10px;
         border-radius: 6px;
         border: none;
         background: #6E6D70;
         color: #DFDEDF;
         user-select: none;
         font-size: 16px;
+      }
+
+      button.look-button {
+        width: 70px;
+        font-size: 12px;
+      }
+
+      button.look-button.active {
+        background: #D2D0CA;
+        color: #272825;
+        box-shadow: 0 0 0 2px #4E514A inset;
+      }
+
+      #devControls {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .control-row {
+        display: flex;
+        gap: 10px;
+      }
+
+      button.sampling-button {
+        width: 100px;
+        font-size: 12px;
+      }
+
+      button.sampling-button.active {
+        background: #BFC8B8;
+        color: #252A22;
+        box-shadow: 0 0 0 2px #495542 inset;
       }
 
       p {
@@ -68,17 +97,34 @@ root: ./projects/fossil/
       }
 
 		</style>
-    <script type="module" crossorigin src="{{page.root}}/index.js"></script>
+    <script type="module" crossorigin src="/index.js"></script>
   </head>
   <body>
     <div id="wrapper">
       <canvas id="my_canvas" ></canvas>
     </div>
-    <button id="prevBtn" style="font-size: 24px; padding-bottom: 4px;">⇇</button>
-    <button id="nextBtn" style="font-size: 24px; padding-bottom: 4px; left: 60px;">⇉</button>
-    <button id="debugBtn" style="left: 110px;">Deb</button>
-    <button id="colorsBtn" style="left: 160px;">Col</button>
-    <button id="soloBtn" style="left: 210px;">Solo</button>
+    <!-- <script type="module" src="/src/tests/arc-collision-test.js"></script> -->
+    <!-- <script type="module" src="/src/tests/point-polygon-test.js"></script> -->
+    <div id="devControls">
+      <div class="control-row">
+        <button id="prevBtn" title="Previous seed" style="font-size: 24px; padding-bottom: 4px;">⇇</button>
+        <button id="repeatBtn" title="Repeat current seed" style="font-size: 24px;">↻</button>
+        <button id="nextBtn" title="Next seed" style="font-size: 24px; padding-bottom: 4px;">⇉</button>
+        <button id="debugBtn">Deb</button>
+        <button id="colorsBtn">Col</button>
+        <button id="soloBtn" hidden>Solo</button>
+      </div>
+      <div class="control-row">
+        <button id="look1Btn" class="look-button" hidden>1 Base</button>
+        <button id="look2Btn" class="look-button" hidden>2 Dense</button>
+        <button id="look3Btn" class="look-button" hidden>3 Aniso</button>
+      </div>
+      <div class="control-row">
+        <button id="samplingLegacyBtn" class="sampling-button" title="Chunk sampling: legacy" hidden>Chunk Legacy</button>
+        <button id="samplingAnisotropicBtn" class="sampling-button" title="Chunk sampling: anisotropic" hidden>Chunk Aniso</button>
+        <button id="samplingRandomBtn" class="sampling-button" title="Chunk sampling: seeded random" hidden>Chunk Random</button>
+      </div>
+    </div>
     <p id="debugText">debug data</p>
   </body>
 </html>
