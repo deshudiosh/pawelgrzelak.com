@@ -95,6 +95,21 @@ root: ./projects/fossil
         box-shadow: 0 0 0 2px #46566D inset;
       }
 
+      button.effect-toggle-button {
+        width: 70px;
+        font-size: 12px;
+      }
+
+      button.effect-toggle-button.active {
+        background: #D4BFCB;
+        color: #30252B;
+        box-shadow: 0 0 0 2px #684D5D inset;
+      }
+
+      #dispersionBtn {
+        margin-left: 10px;
+      }
+
       #prevBtn,
       #repeatBtn,
       #nextBtn {
@@ -108,40 +123,52 @@ root: ./projects/fossil
 
       @media (max-width: 700px) {
         button {
-          width: 20px;
-          height: 20px;
-          border-radius: 3px;
-          font-size: 8px;
+          width: 30px;
+          height: 30px;
+          border-radius: 5px;
+          font-size: 12px;
         }
 
         button.look-button {
-          width: 35px;
-          font-size: 6px;
+          width: 53px;
+          font-size: 9px;
         }
 
         #devControls {
-          left: 5px;
-          gap: 2px;
+			bottom: 0;
+			left: 0;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 5px;
         }
 
         .control-row {
-          gap: 5px;
+			gap: 8px;
         }
 
         button.sampling-button {
-          width: 50px;
-          font-size: 6px;
+			width: 75px;
+			font-size: 9px;
+        }
+
+        button.effect-toggle-button {
+			width: 53px;
+			font-size: 9px;
+        }
+
+        #dispersionBtn {
+          margin-left: 8px;
         }
 
         #prevBtn,
         #repeatBtn,
         #nextBtn {
-          font-size: 12px;
+			font-size: 18px;
         }
 
         #prevBtn,
         #nextBtn {
-          padding-bottom: 2px;
+			padding-bottom: 3px;
         }
       }
 
@@ -179,6 +206,8 @@ root: ./projects/fossil
         <button id="look1Btn" class="look-button" hidden>1 Base</button>
         <button id="look2Btn" class="look-button" hidden>2 Dense</button>
         <button id="look3Btn" class="look-button" hidden>3 Aniso</button>
+		<button id="dispersionBtn" class="effect-toggle-button" title="Toggle final-dot dispersion" hidden>Disp</button>
+		<button id="snapBtn" class="effect-toggle-button" title="Snap final dots to a 0.3-unit grid with 0.05 jitter" hidden>Snap</button>
       </div>
       <div class="control-row">
         <button id="samplingLegacyBtn" class="sampling-button" title="Sampling: legacy" hidden>Sampl Legacy</button>
