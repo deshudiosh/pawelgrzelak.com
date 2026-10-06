@@ -71,6 +71,8 @@ root: ./projects/fossil
         flex-direction: row;
         align-items: center;
         gap: 20px;
+        flex-wrap: wrap;
+        max-width: calc(100vw - 20px);
       }
 
       .control-row {
@@ -81,6 +83,17 @@ root: ./projects/fossil
       button.sampling-button {
         width: 100px;
         font-size: 12px;
+      }
+
+      button.composition-button {
+        width: 65px;
+        font-size: 12px;
+      }
+
+      button.composition-button.active {
+        background: #CBC4AD;
+        color: #302C21;
+        box-shadow: 0 0 0 2px #625941 inset;
       }
 
       button.sampling-button.active {
@@ -118,6 +131,10 @@ root: ./projects/fossil
       }
 
       @media (max-width: 700px) {
+        #my_canvas {
+          box-sizing: border-box;
+        }
+
         body {
           display: flex;
           flex-direction: column;
@@ -156,6 +173,7 @@ root: ./projects/fossil
 			flex-direction: column;
 			align-items: flex-start;
 			gap: 5px;
+            max-width: 100%;
         }
 
         .control-row {
@@ -192,6 +210,11 @@ root: ./projects/fossil
         button.effect-toggle-button {
 			width: 53px;
 			font-size: 9px;
+        }
+
+        button.composition-button {
+          width: 52px;
+          font-size: 10px;
         }
 
         #prevBtn,
@@ -244,6 +267,13 @@ root: ./projects/fossil
         <button id="samplingLegacyBtn" class="sampling-button" title="Sampling: legacy" hidden>Sampl Legacy</button>
         <button id="samplingAnisotropicBtn" class="sampling-button" title="Sampling: anisotropic" hidden>Sampl Aniso</button>
         <button id="samplingRandomBtn" class="sampling-button" title="Sampling: seeded random" hidden>Sampl Random</button>
+      </div>
+      <div class="control-row" aria-label="Composition">
+        <button id="compositionAutoBtn" class="composition-button" title="Seeded composition: 20% single, 20% double, 10% triple, 50% packed" hidden>Auto</button>
+        <button id="compositionPackedBtn" class="composition-button" title="Multiple packed worms" hidden>Packed</button>
+        <button id="compositionSingleBtn" class="composition-button" title="One large worm" hidden>Single</button>
+        <button id="compositionDoubleBtn" class="composition-button" title="Exactly two worms" hidden>Double</button>
+        <button id="compositionTripleBtn" class="composition-button" title="Exactly three worms" hidden>Triple</button>
       </div>
       <div class="control-row">
 		<button id="dispersionBtn" class="effect-toggle-button" title="Toggle final-dot dispersion" hidden>Disp</button>
