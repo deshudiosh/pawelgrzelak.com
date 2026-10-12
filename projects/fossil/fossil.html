@@ -90,6 +90,17 @@ root: ./projects/fossil
         gap: 10px;
       }
 
+      #settingsPanel { display: contents; }
+      #settingsMenuBtn { display: none; }
+
+      .menu-icon {
+        display: block;
+        width: 18px;
+        height: 2px;
+        background: currentColor;
+        box-shadow: 0 -6px currentColor, 0 6px currentColor;
+      }
+
       .navigation-controls {
         margin-left: auto;
         flex-shrink: 0;
@@ -185,33 +196,75 @@ root: ./projects/fossil
         }
 
         #devControls {
-			position: relative;
-			bottom: auto;
-			left: auto;
-			flex: 0 0 auto;
-			width: 100%;
-			box-sizing: border-box;
-			padding: 5px 0 max(5px, env(safe-area-inset-bottom));
-			background: #141414;
-			flex-direction: column;
-			align-items: flex-start;
-			gap: 5px;
-            max-width: 100%;
+          padding: 6px max(8px, env(safe-area-inset-right)) max(6px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          gap: 8px;
         }
+
+        #settingsMenuBtn {
+          display: grid;
+          place-items: center;
+          width: 40px;
+          height: 40px;
+          flex-shrink: 0;
+        }
+
+        #settingsMenuBtn[aria-expanded="true"] {
+          background: #D2D0CA;
+          color: #272825;
+        }
+
+        #settingsMenuBtn[aria-expanded="true"] .menu-icon {
+          height: auto;
+          background: none;
+          box-shadow: none;
+          font-size: 26px;
+          line-height: 1;
+        }
+
+        #settingsMenuBtn[aria-expanded="true"] .menu-icon::before { content: "×"; }
+
+        #settingsPanel {
+          display: none;
+          order: -1;
+          flex: 0 0 100%;
+          max-height: 45dvh;
+          overflow-y: auto;
+          overscroll-behavior: contain;
+          padding-bottom: 8px;
+          border-bottom: 1px solid #30302f;
+        }
+
+        #devControls.settings-open #settingsPanel {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        #settingsPanel .control-row { flex-wrap: wrap; }
 
         .control-row {
 			gap: 8px;
         }
 
         .navigation-controls {
-          align-self: flex-end;
+          margin-left: auto;
+          gap: 6px;
         }
 
         #prevBtn,
         #repeatBtn,
         #nextBtn {
-          width: 46px;
-          height: 46px;
+          width: 40px;
+          height: 40px;
+        }
+
+        #replayBtn {
+          width: 56px;
+          height: 40px;
+          font-size: 11px;
         }
 
         #nextBtn {
@@ -307,6 +360,10 @@ root: ./projects/fossil
     <!-- <script type="module" src="{{ page.root }}/src/tests/arc-collision-test.js"></script> -->
     <!-- <script type="module" src="{{ page.root }}/src/tests/point-polygon-test.js"></script> -->
     <div id="devControls">
+      <button id="settingsMenuBtn" type="button" aria-label="Open settings" aria-controls="settingsPanel" aria-expanded="false" title="Open settings">
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
+      <div id="settingsPanel" role="group" aria-label="Drawing settings">
       <div class="control-row">
         <button id="debugBtn" class="debug-toggle-button" title="Toggle debug drawing">Deb</button>
         <button id="colorsBtn" class="debug-toggle-button" title="Toggle debug colours">Col</button>
@@ -339,13 +396,14 @@ root: ./projects/fossil
 		<button id="snapBtn" class="effect-toggle-button" title="Snap final dots to a 0.3-unit grid with 0.05 jitter" hidden>Snap</button>
         <button id="exportVideoBtn" title="Export video locally with FFmpeg" hidden disabled>Export video</button>
       </div>
+      <p id="videoExportStatus" role="status" hidden></p>
+      </div>
       <div class="control-row navigation-controls" role="group" aria-label="Playback and seed navigation">
         <button id="repeatBtn" title="Repeat current seed">↻</button>
         <button id="replayBtn" class="effect-toggle-button" title="Replay the cached animation" hidden>Replay</button>
         <button id="prevBtn" title="Previous seed">⇇</button>
         <button id="nextBtn" title="Next seed">⇉</button>
       </div>
-      <p id="videoExportStatus" role="status" hidden></p>
     </div>
     <p id="debugText">debug data</p>
   </body>
