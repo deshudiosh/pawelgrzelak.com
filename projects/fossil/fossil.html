@@ -107,7 +107,7 @@ root: ./projects/fossil
       }
 
       #exportVideoBtn { width: 112px; font-size: 12px; }
-      #videoExportStatus { width: 100%; margin: 0; font-size: 12px; color: #c6c6c6; overflow-wrap: anywhere; text-align: center; }
+      #videoExportStatus { position: static; width: 100%; margin: 0; font-size: 12px; color: #c6c6c6; overflow-wrap: anywhere; text-align: center; }
       #videoExportStatus a { color: #e8dcc2; }
 
       @media (max-width: 700px), (hover: none), (pointer: coarse) {
@@ -328,6 +328,37 @@ root: ./projects/fossil
       .animation-status[hidden] { display: none; }
       a.effect-toggle-button { display: grid; place-items: center; width: 90px; height: 40px; border-radius: 6px; background: #6E6D70; color: #DFDEDF; font: 12px system-ui,sans-serif; text-decoration: none; }
       a.effect-toggle-button[hidden] { display: none; }
+      @media (min-width: 701px) {
+        #devControls {
+          padding: 5px 6px max(5px, env(safe-area-inset-bottom));
+          gap: 5px 8px;
+        }
+
+        #settingsPanel .control-row { gap: 5px; }
+
+        #settingsPanel button {
+          width: 20px;
+          height: 20px;
+          border-radius: 3px;
+          font-size: 9px;
+        }
+
+        #settingsPanel button.look-button,
+        #settingsPanel button.effect-toggle-button {
+          width: 35px;
+          font-size: 7px;
+        }
+
+        #settingsPanel button.sampling-button { width: 50px; font-size: 7px; }
+        #settingsPanel button.composition-button { width: 32.5px; font-size: 7px; }
+        #settingsPanel #exportVideoBtn { width: 56px; font-size: 7px; }
+        #settingsPanel a.effect-toggle-button {
+          width: 45px;
+          height: 20px;
+          border-radius: 3px;
+          font-size: 7px;
+        }
+      }
       @media (max-width: 700px) { a.effect-toggle-button {height:30px;font-size:10px;width:78px} }
       body.animation-preview #devControls, body.animation-preview > p { display: none; }
       body.animation-preview #my_canvas { border: 0; }
@@ -368,9 +399,9 @@ root: ./projects/fossil
         <button id="debugBtn" class="debug-toggle-button" title="Toggle debug drawing">Deb</button>
         <button id="colorsBtn" class="debug-toggle-button" title="Toggle debug colours">Col</button>
         <button id="soloBtn" hidden>Solo</button>
-        <button id="look1Btn" class="look-button" hidden>1 Base</button>
-        <button id="look2Btn" class="look-button" hidden>2 Dense</button>
-        <button id="look3Btn" class="look-button" hidden>3 Aniso</button>
+        <button id="look1Btn" class="look-button" hidden>Base</button>
+        <button id="look2Btn" class="look-button" hidden>Dense</button>
+        <button id="look3Btn" class="look-button" hidden>Aniso</button>
       </div>
       <div class="control-row">
         <button id="samplingLegacyBtn" class="sampling-button" title="Sampling: legacy" hidden>Sampl Legacy</button>
@@ -394,6 +425,7 @@ root: ./projects/fossil
       <div class="control-row">
 		<button id="dispersionBtn" class="effect-toggle-button" title="Toggle final-dot dispersion" hidden>Disp</button>
 		<button id="snapBtn" class="effect-toggle-button" title="Snap final dots to a 0.3-unit grid with 0.05 jitter" hidden>Snap</button>
+        <button id="whiteBackgroundBtn" class="effect-toggle-button" title="Match the exterior background to the light stone colour" hidden>Light BG</button>
         <button id="exportVideoBtn" title="Export video locally with FFmpeg" hidden disabled>Export video</button>
       </div>
       <p id="videoExportStatus" role="status" hidden></p>
